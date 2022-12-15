@@ -48,7 +48,7 @@ const Navbar = (props: {}) => {
             <HStack
               direction="row"
               justify="left"
-              fontSize="0.8rem"
+              fontSize="1rem"
               fontFamily={(theme as any).fonts.poppins.medium}
               fontWeight="500"
               key={index}
@@ -77,7 +77,7 @@ const Navbar = (props: {}) => {
           <HStack
             direction="row"
             justify="left"
-            fontSize="0.8rem"
+            fontSize="1rem"
             fontFamily={(theme as any).fonts.poppins.medium}
             fontWeight="500"
           >
@@ -98,7 +98,7 @@ const Navbar = (props: {}) => {
           <HStack
             direction="row"
             justify="left"
-            fontSize="0.8rem"
+            fontSize="1rem"
             fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
@@ -116,7 +116,7 @@ const Navbar = (props: {}) => {
           <HStack
             direction="row"
             justify="left"
-            fontSize="0.8rem"
+            fontSize="1rem"
             fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
@@ -149,7 +149,7 @@ const Navbar = (props: {}) => {
           <HStack
             direction="row"
             justify="left"
-            fontSize="0.8rem"
+            fontSize="1rem"
             fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
@@ -163,7 +163,7 @@ const Navbar = (props: {}) => {
           <HStack
             direction="row"
             justify="left"
-            fontSize="0.8rem"
+            fontSize="1rem"
             fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
@@ -175,7 +175,7 @@ const Navbar = (props: {}) => {
           <HStack
             direction="row"
             justify="left"
-            fontSize="0.8rem"
+            fontSize="1rem"
             fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"

@@ -48,7 +48,7 @@ const Sidebar = (props: {}) => {
     >
       <Flex w="70%" marginBottom="1rem">
         <Heading
-          size="md"
+          fontSize="1.6rem"
           color="#17308a"
           fontFamily={(theme as any).fonts.heading.regular}
         >
@@ -56,7 +56,9 @@ const Sidebar = (props: {}) => {
         </Heading>
       </Flex>
       <Flex w="70%" marginBottom="0.5rem">
-        <Heading size="sm">Menu</Heading>
+        <Heading fontSize="1.3rem" color="gray.700">
+          Menu
+        </Heading>
       </Flex>
       {mainMenuList.map(({ icon, name, active }, index) => (
         <HStack
@@ -73,13 +75,13 @@ const Sidebar = (props: {}) => {
           <Flex w="15%">
             <Icon as={icon} boxSize={4} />
           </Flex>
-          <Flex w="85%">
+          <Flex w="85%" fontSize="1rem">
             <Text>{name}</Text>
           </Flex>
         </HStack>
       ))}
       <Flex w="70%" marginTop="1.2rem" marginBottom="0.5rem">
-        <Heading size="sm">General</Heading>
+        <Heading fontSize="1.3rem">General</Heading>
       </Flex>
       {generalMenuList.map(({ icon, name, active }, index) => (
         <HStack
@@ -96,7 +98,7 @@ const Sidebar = (props: {}) => {
           <Flex w="15%">
             <Icon as={icon} boxSize={4} />
           </Flex>
-          <Flex w="85%">
+          <Flex w="85%" fontSize="1rem">
             <Text>{name}</Text>
           </Flex>
         </HStack>
