@@ -18,11 +18,17 @@ type MenuListItem = {
   icon: IconType;
   name: String;
   active?: boolean;
+  url?: String;
 };
 
 const mainMenuList: Array<MenuListItem> = [
   { icon: AiFillHome, name: "Home", active: true },
-  { icon: AiOutlineStock, name: "Statistics", active: false },
+  {
+    icon: AiOutlineStock,
+    name: "Workspaces",
+    active: false,
+    url: "/workspaces",
+  },
   { icon: HiOutlineCubeTransparent, name: "Dashboard", active: false },
   { icon: AiTwotoneCalendar, name: "Calendar", active: false },
 ];
