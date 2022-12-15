@@ -2,7 +2,9 @@ import { NextPage } from "next";
 import { Grid, GridItem, Heading } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import DashboardMain from "../components/Dashboard";
+// import DashboardMain from "../components/Dashboard";
+// import Workspaces from "../components/Workspaces";
+import Boards from "../components/Boards";
 
 const Dashboard: NextPage = () => {
   return (
@@ -34,7 +36,7 @@ const Dashboard: NextPage = () => {
         gridRowStart="3"
         gridRowEnd="13"
       >
-        <DashboardMain />
+        <Boards />
       </GridItem>
     </Grid>
   );

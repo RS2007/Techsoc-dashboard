@@ -12,15 +12,22 @@ import { AiFillHome, AiOutlineStock, AiTwotoneCalendar } from "react-icons/ai";
 import { HiOutlineCubeTransparent } from "react-icons/hi";
 import { FiSettings, FiHelpCircle, FiLogOut } from "react-icons/fi";
 import { GrCircleInformation } from "react-icons/gr";
+import { IconType } from "react-icons";
 
-const mainMenuList = [
+type MenuListItem = {
+  icon: IconType;
+  name: String;
+  active?: boolean;
+};
+
+const mainMenuList: Array<MenuListItem> = [
   { icon: AiFillHome, name: "Home", active: true },
   { icon: AiOutlineStock, name: "Statistics", active: false },
   { icon: HiOutlineCubeTransparent, name: "Dashboard", active: false },
   { icon: AiTwotoneCalendar, name: "Calendar", active: false },
 ];
 
-const generalMenuList = [
+const generalMenuList: Array<MenuListItem> = [
   { icon: FiSettings, name: "Settings" },
   { icon: FiHelpCircle, name: "Help Center" },
   { icon: GrCircleInformation, name: "About" },
@@ -43,7 +50,7 @@ const Sidebar = (props: {}) => {
         <Heading
           size="md"
           color="#17308a"
-          fontFamily={theme.fonts.heading.regular}
+          fontFamily={(theme as any).fonts.heading.regular}
         >
           Dashboard
         </Heading>
@@ -56,7 +63,7 @@ const Sidebar = (props: {}) => {
           key={index}
           justify="center"
           w="70%"
-          fontFamily={theme.fonts.poppins.regular}
+          fontFamily={(theme as any).fonts.poppins.regular}
           fontSize="0.8rem"
           paddingY="0.5rem"
           color={active ? "#17308a" : ""}
@@ -79,7 +86,7 @@ const Sidebar = (props: {}) => {
           key={index}
           justify="center"
           w="70%"
-          fontFamily={theme.fonts.poppins.regular}
+          fontFamily={(theme as any).fonts.poppins.regular}
           fontSize="0.8rem"
           paddingY="0.5rem"
           color={active ? "#17308a" : ""}

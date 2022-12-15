@@ -1,0 +1,5 @@
+- User logs in 
+- Can create workspace
+- Can create board in workspace
+- Generate cards in workspace
+- Move cards around

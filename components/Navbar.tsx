@@ -10,11 +10,10 @@ import {
   Divider,
   AvatarGroup,
   Avatar,
-  Box,
 } from "@chakra-ui/react";
 import { FiChevronDown } from "react-icons/fi";
 import SearchBar from "../components/SearchBar";
-import { AiFillLock, AiOutlineBell } from "react-icons/ai";
+import { AiFillLock } from "react-icons/ai";
 import { RiDashboardFill } from "react-icons/ri";
 import { CgBell } from "react-icons/cg";
 import { BiShareAlt } from "react-icons/bi";
@@ -50,7 +49,7 @@ const Navbar = (props: {}) => {
               direction="row"
               justify="left"
               fontSize="0.8rem"
-              fontFamily={theme.fonts.poppins.medium}
+              fontFamily={(theme as any).fonts.poppins.medium}
               fontWeight="500"
               key={index}
             >
@@ -79,7 +78,7 @@ const Navbar = (props: {}) => {
             direction="row"
             justify="left"
             fontSize="0.8rem"
-            fontFamily={theme.fonts.poppins.medium}
+            fontFamily={(theme as any).fonts.poppins.medium}
             fontWeight="500"
           >
             <Text>Username</Text>
@@ -100,7 +99,7 @@ const Navbar = (props: {}) => {
             direction="row"
             justify="left"
             fontSize="0.8rem"
-            fontFamily={theme.fonts.poppins.regular}
+            fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
           >
@@ -118,7 +117,7 @@ const Navbar = (props: {}) => {
             direction="row"
             justify="left"
             fontSize="0.8rem"
-            fontFamily={theme.fonts.poppins.regular}
+            fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
             paddingLeft="1rem"
@@ -151,7 +150,7 @@ const Navbar = (props: {}) => {
             direction="row"
             justify="left"
             fontSize="0.8rem"
-            fontFamily={theme.fonts.poppins.regular}
+            fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
             paddingLeft="1rem"
@@ -165,7 +164,7 @@ const Navbar = (props: {}) => {
             direction="row"
             justify="left"
             fontSize="0.8rem"
-            fontFamily={theme.fonts.poppins.regular}
+            fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
             paddingLeft="1rem"
@@ -177,7 +176,7 @@ const Navbar = (props: {}) => {
             direction="row"
             justify="left"
             fontSize="0.8rem"
-            fontFamily={theme.fonts.poppins.regular}
+            fontFamily={(theme as any).fonts.poppins.regular}
             fontWeight="400"
             marginRight="1rem"
             paddingLeft="1rem"
