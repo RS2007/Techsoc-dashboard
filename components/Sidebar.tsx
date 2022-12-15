@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import {
   Flex,
   Heading,
@@ -27,7 +28,7 @@ const mainMenuList: Array<MenuListItem> = [
     icon: AiOutlineStock,
     name: "Workspaces",
     active: false,
-    url: "/workspaces",
+    url: "/dashboard/workspaces",
   },
   { icon: HiOutlineCubeTransparent, name: "Dashboard", active: false },
   { icon: AiTwotoneCalendar, name: "Calendar", active: false },
@@ -42,6 +43,7 @@ const generalMenuList: Array<MenuListItem> = [
 
 const Sidebar = (props: {}) => {
   const theme = useTheme();
+  const router = useRouter();
   return (
     <Flex
       direction="column"
@@ -89,7 +91,7 @@ const Sidebar = (props: {}) => {
       <Flex w="70%" marginTop="1.2rem" marginBottom="0.5rem">
         <Heading fontSize="1.3rem">General</Heading>
       </Flex>
-      {generalMenuList.map(({ icon, name, active }, index) => (
+      {generalMenuList.map(({ icon, name, active, url }, index) => (
         <HStack
           key={index}
           justify="center"
@@ -100,6 +102,10 @@ const Sidebar = (props: {}) => {
           color={active ? "#17308a" : ""}
           transitionDelay="50ms"
           _hover={{ background: "#c6e2ff", color: "black" }}
+          onClick={function (e) {
+            e.preventDefault();
+            if (url) router.push(url);
+          }}
         >
           <Flex w="15%">
             <Icon as={icon} boxSize={4} />
