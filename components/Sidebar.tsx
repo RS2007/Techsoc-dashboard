@@ -104,7 +104,7 @@ const Sidebar = (props: {}) => {
           _hover={{ background: "#c6e2ff", color: "black" }}
           onClick={function (e) {
             e.preventDefault();
-            if (url) router.push(url);
+            if (url) router.push(new URL(`${router.asPath}{url}`));
           }}
         >
           <Flex w="15%">
