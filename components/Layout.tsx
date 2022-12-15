@@ -1,12 +1,8 @@
-import { NextPage } from "next";
-import { Grid, GridItem, Heading } from "@chakra-ui/react";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-// import DashboardMain from "../components/Dashboard";
-// import Workspaces from "../components/Workspaces";
-import Boards from "../components/Boards";
+import { Grid, GridItem } from "@chakra-ui/react";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
-const Dashboard: NextPage = () => {
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Grid
       height="100vh"
@@ -36,10 +32,10 @@ const Dashboard: NextPage = () => {
         gridRowStart="3"
         gridRowEnd="13"
       >
-        <Boards />
+        {children}
       </GridItem>
     </Grid>
   );
 };
 
-export default Dashboard;
+export default DashboardLayout;

@@ -21,7 +21,7 @@ const WorkspaceCard = ({ name, description }: WorkSpaceCardProps) => {
     <Flex
       direction="column"
       fontFamily={(theme as any).fonts.heading.regular}
-      w="40%"
+      maxW="400px"
       bg="white"
       padding="1rem"
       borderRadius="12px"
@@ -29,12 +29,11 @@ const WorkspaceCard = ({ name, description }: WorkSpaceCardProps) => {
         boxShadow:
           "6px 6px 12px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
       }}
-      maxW="300px"
     >
       <Heading
         size="sm"
-        fontWeight="400"
-        fontSize="1rem"
+        fontWeight="500"
+        fontSize="1.2rem"
         fontFamily={(theme as any).fonts.heading.regular}
         marginBottom="0.3rem"
       >
@@ -42,7 +41,7 @@ const WorkspaceCard = ({ name, description }: WorkSpaceCardProps) => {
       </Heading>
       <Text
         color="gray.600"
-        fontSize="0.8rem"
+        fontSize="1rem"
         fontFamily={(theme as any).fonts.heading.regular}
       >
         {description}

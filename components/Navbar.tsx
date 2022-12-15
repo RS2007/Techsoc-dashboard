@@ -12,7 +12,7 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import { FiChevronDown } from "react-icons/fi";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "./SearchBar";
 import { AiFillLock } from "react-icons/ai";
 import { RiDashboardFill } from "react-icons/ri";
 import { CgBell } from "react-icons/cg";

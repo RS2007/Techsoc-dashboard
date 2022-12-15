@@ -15,7 +15,7 @@ type props = {
 };
 const BoardsCard = ({ name, description }: props) => {
   return (
-    <>
+    <Flex direction="column">
       <Heading size="lg">Boards</Heading>
       <Flex
         direction="column"
@@ -50,7 +50,7 @@ const BoardsCard = ({ name, description }: props) => {
           </Flex>
         </Flex>
       </Flex>
-    </>
+    </Flex>
   );
 };
 
