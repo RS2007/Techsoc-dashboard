@@ -36,8 +36,13 @@ const WorkspaceCard = ({
         boxShadow:
           "6px 6px 12px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
       }}
+      cursor="pointer"
       onClick={() => {
         router.push(`/dashboard/boards/${workspaceId}`);
+      }}
+      _hover={{
+        border: "1px solid",
+        borderColor: "blue.600",
       }}
     >
       <Heading

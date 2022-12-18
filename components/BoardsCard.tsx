@@ -26,13 +26,15 @@ const BoardsCard = ({ name, description, boardId }: props) => {
       w="300px"
       padding="1.3rem"
       borderRadius="12px"
-      style={{
-        boxShadow:
-          "6px 6px 12px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
-      }}
+      boxShadow="6px 6px 12px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)"
       justify="space-between"
       onClick={function (e) {
         router.push(`/dashboard/cards/${boardId}`);
+      }}
+      cursor="pointer"
+      _hover={{
+        boxShadow:
+          "8px 8px 40px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
       }}
     >
       <Heading

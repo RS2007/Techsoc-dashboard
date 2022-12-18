@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       bg="#f6f8fa"
     >
       <GridItem
-        gridColumnStart="4"
+        gridColumnStart={{ sm: "1", lg: "4" }}
         gridColumnEnd="25"
         gridRowStart="1"
         gridRowEnd="4"

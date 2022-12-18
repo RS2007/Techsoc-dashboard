@@ -53,6 +53,7 @@ const Sidebar = (props: {}) => {
       align="center"
       paddingY="1rem"
       border="1px solid #e5e5e5"
+      display={{ base: "none", lg: "flex" }}
     >
       <Flex w="70%" marginBottom="1rem">
         <Heading
@@ -73,8 +74,9 @@ const Sidebar = (props: {}) => {
           cursor="pointer"
           key={index}
           justify="center"
-          w="70%"
+          w="100%"
           fontFamily={(theme as any).fonts.poppins.regular}
+          paddingLeft="2rem"
           fontSize="0.8rem"
           paddingY="0.5rem"
           color={active ? "#17308a" : ""}
@@ -99,9 +101,11 @@ const Sidebar = (props: {}) => {
         <HStack
           key={index}
           justify="center"
-          w="70%"
+          w="100%"
           fontFamily={(theme as any).fonts.poppins.regular}
           fontSize="0.8rem"
+          paddingLeft="2rem"
+          cursor="pointer"
           paddingY="0.5rem"
           color={active ? "#17308a" : ""}
           transitionDelay="50ms"
