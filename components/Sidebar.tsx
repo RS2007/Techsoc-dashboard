@@ -68,8 +68,9 @@ const Sidebar = (props: {}) => {
           Menu
         </Heading>
       </Flex>
-      {mainMenuList.map(({ icon, name, active }, index) => (
+      {mainMenuList.map(({ icon, name, active, url }, index) => (
         <HStack
+          cursor="pointer"
           key={index}
           justify="center"
           w="70%"
@@ -79,6 +80,9 @@ const Sidebar = (props: {}) => {
           color={active ? "#17308a" : ""}
           transitionDelay="50ms"
           _hover={{ background: "#c6e2ff", color: "black" }}
+          onClick={function (e) {
+            if (url) router.push(url as string);
+          }}
         >
           <Flex w="15%">
             <Icon as={icon} boxSize={4} />
@@ -102,10 +106,6 @@ const Sidebar = (props: {}) => {
           color={active ? "#17308a" : ""}
           transitionDelay="50ms"
           _hover={{ background: "#c6e2ff", color: "black" }}
-          onClick={function (e) {
-            e.preventDefault();
-            if (url) router.push(new URL(`${router.asPath}{url}`));
-          }}
         >
           <Flex w="15%">
             <Icon as={icon} boxSize={4} />

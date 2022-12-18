@@ -19,8 +19,19 @@ import { CgBell } from "react-icons/cg";
 import { BiShareAlt } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineFilter } from "react-icons/hi";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 const Navbar = (props: {}) => {
   const theme = useTheme();
+  const [username, setUsername] = useState<string | null>("");
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("username")) {
+      setUsername(localStorage.getItem("username"));
+    } else {
+      router.push("/login");
+    }
+  }, []);
   return (
     <VStack
       width="100%"
@@ -81,7 +92,7 @@ const Navbar = (props: {}) => {
             fontFamily={(theme as any).fonts.poppins.medium}
             fontWeight="500"
           >
-            <Text>Username</Text>
+            <Text>{username}</Text>
             <Icon as={FiChevronDown} />
           </HStack>
         </Flex>

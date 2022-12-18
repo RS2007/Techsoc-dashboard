@@ -9,10 +9,42 @@ import {
   useTheme,
   Icon,
 } from "@chakra-ui/react";
+import { useDraggable } from "@dnd-kit/core";
 import { BiCommentDetail } from "react-icons/bi";
 
-const TrelloCard = (props: {}) => {
+const cardTitleStatusMap = {
+  Todo: "THINGS_TO_DO",
+  Doing: "DOING",
+  Review: "REVIEW",
+  Done: "COMPLETED",
+};
+
+type statusUnion = typeof cardTitleStatusMap[keyof typeof cardTitleStatusMap];
+
+type fetchedCards = {
+  title: string;
+  description: string;
+  status: statusUnion;
+};
+
+const TrelloCard = ({
+  key,
+  title,
+  description,
+  cardId,
+}: {
+  key: number;
+  title: string;
+  description: string;
+  cardId: number;
+}) => {
   const theme = useTheme();
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: "draggable-card-" + cardId,
+  });
+  const style = transform
+    ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` }
+    : {};
   return (
     <Flex
       direction="column"
@@ -21,10 +53,15 @@ const TrelloCard = (props: {}) => {
       bg="white"
       padding="1rem"
       borderRadius="12px"
+      marginBottom="1rem"
       style={{
         boxShadow:
           "6px 6px 12px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
+        ...style,
       }}
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
     >
       <Tag variant="solid" bg="#a6d6f680" w="25%" marginBottom="0.6rem">
         <Text color="blue" fontSize="0.8rem" fontWeight="300">
@@ -33,20 +70,19 @@ const TrelloCard = (props: {}) => {
       </Tag>
       <Heading
         size="sm"
-        fontWeight="400"
-        fontSize="1rem"
+        fontWeight="500"
+        fontSize="1.2rem"
         fontFamily={(theme as any).fonts.heading.regular}
         marginBottom="0.3rem"
       >
-        Frontend code refactor
+        {title}
       </Heading>
       <Text
         color="gray.600"
-        fontSize="0.8rem"
+        fontSize="1rem"
         fontFamily={(theme as any).fonts.heading.regular}
       >
-        Change the logic in the frontend to render information sent from the
-        backend
+        {description}
       </Text>
       <Divider
         colorScheme="blackAlpha"

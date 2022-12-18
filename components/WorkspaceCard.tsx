@@ -10,24 +10,34 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { BiCommentDetail } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 type WorkSpaceCardProps = {
-  name: String;
-  description: String;
+  name: string;
+  description: string;
+  workspaceId: number;
 };
-const WorkspaceCard = ({ name, description }: WorkSpaceCardProps) => {
+const WorkspaceCard = ({
+  name,
+  description,
+  workspaceId,
+}: WorkSpaceCardProps) => {
   const theme = useTheme();
+  const router = useRouter();
   return (
     <Flex
       direction="column"
       fontFamily={(theme as any).fonts.heading.regular}
-      maxW="400px"
+      w="300px"
       bg="white"
       padding="1rem"
       borderRadius="12px"
       style={{
         boxShadow:
           "6px 6px 12px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
+      }}
+      onClick={() => {
+        router.push(`/dashboard/boards/${workspaceId}`);
       }}
     >
       <Heading

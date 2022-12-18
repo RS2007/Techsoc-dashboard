@@ -1,76 +1,84 @@
+import React from "react";
 import {
   Button,
   Flex,
-  FormControl,
-  FormErrorMessage,
   FormLabel,
-  Heading,
-  Icon,
-  Input,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
+  ModalBody,
+  FormErrorMessage,
+  ModalFooter,
+  Input,
+  FormControl,
   Textarea,
   useDisclosure,
+  useTheme,
   useToast,
 } from "@chakra-ui/react";
-import axios from "../utils/_axios";
-import { useTheme } from "@emotion/react";
+import TrelloCard from "./TrelloCard";
 import { useState, useEffect } from "react";
-import WorkspaceCard from "./WorkspaceCard";
+import axios from "../utils/_axios";
+import { useDroppable } from "@dnd-kit/core";
 
-type fetchedWorkspace = {
-  title: string;
-  description: string;
-  workspaceId: number;
+const cardTitleStatusMap = {
+  Todo: "THINGS_TO_DO",
+  Doing: "DOING",
+  Review: "REVIEW",
+  Done: "COMPLETED",
 };
 
-const Workspaces = (props: {}) => {
+type statusUnion = typeof cardTitleStatusMap[keyof typeof cardTitleStatusMap];
+
+type fetchedCards = {
+  title: string;
+  description: string;
+  status: statusUnion;
+  cardId: number;
+};
+
+const TrelloContainer = ({
+  key,
+  containerTitle,
+  boardId,
+  cards,
+  cardsLoading,
+  setCards,
+}: {
+  key: number;
+  containerTitle: keyof typeof cardTitleStatusMap;
+  boardId: string;
+  cards: Array<fetchedCards>;
+  cardsLoading: boolean;
+  setCards: React.Dispatch<React.SetStateAction<fetchedCards[]>>;
+}) => {
   const theme = useTheme();
   const toast = useToast();
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [titleError, setTitleError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
-  const [workspaces, setWorkspaces] = useState<Array<fetchedWorkspace>>([]);
-  const [workspaceLoading, setWorkspaceLoading] = useState(true);
-  useEffect(() => {
-    async function fetchWorkspaces() {
-      try {
-        const fetchedWorkspaces: {
-          data: { workspaces: Array<fetchedWorkspace> };
-        } = await axios.get("/workspaces/all", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        console.log(fetchedWorkspaces);
-        setWorkspaces(fetchedWorkspaces.data.workspaces);
-        setWorkspaceLoading(false);
-      } catch (e: any) {
-        toast({
-          status: "error",
-          title: e.message,
-        });
-      }
-    }
-    fetchWorkspaces();
-  }, []);
+
+  const { isOver, setNodeRef } = useDroppable({
+    id: "droppable-" + containerTitle,
+  });
+
+  const style = isOver ? { backgroundColor: "#E2E8F0" } : {};
+
   const onSubmit = async () => {
     if (!title || !description) {
       setTitleError(title ? "" : "Title is required");
       setDescriptionError(description ? "" : "Description is required");
     } else {
       try {
-        const newWorkspace = (
+        const newCard = (
           await axios.post(
-            "/workspaces/add",
-            { title, description },
+            `/cards/${boardId}/add`,
+            { title, description, status: cardTitleStatusMap[containerTitle] },
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -78,8 +86,8 @@ const Workspaces = (props: {}) => {
             }
           )
         ).data;
-        console.log(newWorkspace);
-        setWorkspaces((prevState) => [...prevState, newWorkspace]);
+        console.log(newCard);
+        setCards((prevState) => [...prevState, newCard]);
         onClose();
       } catch (e: any) {
         toast({
@@ -89,38 +97,53 @@ const Workspaces = (props: {}) => {
       }
     }
   };
+
   return (
-    <Flex paddingLeft="1rem" direction="column" paddingRight="1rem">
-      <Heading size="lg" marginBottom="1rem">
-        Your workspaces
-      </Heading>
-      <Flex direction="row" flexWrap="wrap" gap="1rem" marginBottom="1rem">
-        {!workspaceLoading &&
-          workspaces.map(({ title, description, workspaceId }, index) => (
-            <WorkspaceCard
-              key={index}
-              name={title}
-              description={description}
-              workspaceId={workspaceId}
-            />
-          ))}
-      </Flex>
-      <Button
-        maxW="180px"
-        colorScheme="purple"
-        _hover={{ bg: "purple.600" }}
-        fontFamily={(theme as any).fonts.poppins.regular}
+    <Flex key={key} direction="column" w="20rem" ref={setNodeRef} style={style}>
+      <Flex
+        borderRadius="12px"
+        justify="space-between"
+        bg="white"
+        padding="1rem"
         fontWeight="500"
-        justifyContent="center"
+        fontFamily={(theme as any).fonts.heading.regular}
+        style={{
+          boxShadow:
+            "6px 6px 12px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
+        }}
+        marginBottom="1rem"
+      >
+        <Text fontWeight="500" fontSize="1.2rem">
+          {containerTitle}
+        </Text>
+      </Flex>
+      {!cardsLoading &&
+        cards.map(({ title, description, cardId }, index) => (
+          <TrelloCard
+            key={index}
+            title={title}
+            description={description}
+            cardId={cardId}
+          />
+        ))}
+      <Button
+        w="100%"
+        marginTop="1rem"
+        color="gray.500"
+        fontSize="1.5rem"
+        style={{
+          boxShadow:
+            "6px 6px 6px rgba(184, 185, 190, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.25)",
+        }}
         onClick={onOpen}
       >
-        New workspace
+        +
       </Button>
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Create New Workspace</ModalHeader>
+            <ModalHeader>Create New Card</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <FormControl
@@ -135,7 +158,7 @@ const Workspaces = (props: {}) => {
                 </FormLabel>
                 <Input
                   type="text"
-                  placeholder="Enter workspace title"
+                  placeholder="Enter card title"
                   value={title}
                   onChange={(e) => {
                     setTitle(e.target.value);
@@ -155,13 +178,23 @@ const Workspaces = (props: {}) => {
                   Description
                 </FormLabel>
                 <Textarea
-                  placeholder="Enter workspace title"
+                  placeholder="Enter card description"
                   value={description}
                   onChange={(e) => {
                     setDescription(e.target.value);
                   }}
                 />
                 <FormErrorMessage>{descriptionError}</FormErrorMessage>
+              </FormControl>
+              <FormControl>
+                <FormLabel
+                  style={{ fontWeight: "600 !important" }}
+                  fontFamily={(theme as any).fonts.heading.regular}
+                >
+                  Status
+                </FormLabel>
+
+                <Input value={containerTitle} disabled />
               </FormControl>
             </ModalBody>
 
@@ -176,5 +209,4 @@ const Workspaces = (props: {}) => {
     </Flex>
   );
 };
-
-export default Workspaces;
+export default TrelloContainer;
