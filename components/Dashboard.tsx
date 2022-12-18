@@ -1,5 +1,5 @@
 import { Flex, Heading, HStack, useToast } from "@chakra-ui/react";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import TrelloContainer from "./TrelloContainer";
 import { useState, useEffect } from "react";
 import axios from "../utils/_axios";
@@ -28,14 +28,17 @@ type fetchedCards = {
 
 const Dashboard = ({ id }: { id: string }) => {
   const toast = useToast();
-  const handleDragEnd = async (event: any) => {
+  const handleDragEnd = async (event: DragEndEvent) => {
     console.log(event.active);
     try {
       if (event.over) {
-        const movingCardId = parseInt(event.active.id.split("-")[2]);
-        const newStatus: statusUnion = event?.over?.id.split(
-          "-"
-        )[1] as statusUnion;
+        const movingCardId = parseInt(
+          (event.active.id as string).split("-")[2]
+        );
+        const statusStringSplit: Array<keyof typeof cardTitleStatusMap> = (
+          event?.over?.id as string
+        ).split("-") as Array<keyof typeof cardTitleStatusMap>;
+        const newStatus: keyof typeof cardTitleStatusMap = statusStringSplit[1];
         await axios.put(
           `/cards/${id}/change`,
           {
